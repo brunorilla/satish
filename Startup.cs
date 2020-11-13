@@ -33,6 +33,8 @@ namespace Satish
                     {
                         sqlOptions.EnableRetryOnFailure();
                     }));
+            services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductContext")));
+            services.AddDbContext<CartContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CartContext")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
