@@ -22,13 +22,13 @@ namespace Satish.Controllers
         // GET: Products
         public async Task<IActionResult> Index(string searchString)
         {
-            var products = from p in _context.Product
-                           select p;
+            var products = from m in _context.Product
+                           select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(p => p.Name.Contains(searchString));
+                products = products.Where(s => s.Name.Contains(searchString));
             }
-            return View(await _context.Product.ToListAsync());
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
