@@ -19,5 +19,6 @@ namespace Satish.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
 
+        public List<CartProduct> CartProducts { get; set; }
     }
 }
