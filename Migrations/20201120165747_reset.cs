@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Satish.Migrations.Cart
+namespace Satish.Migrations
 {
-    public partial class cartMigration : Migration
+    public partial class reset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace Satish.Migrations.Cart
                     Id_AspNetUsers = table.Column<int>(nullable: false),
                     estado = table.Column<bool>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {

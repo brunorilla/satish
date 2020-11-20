@@ -14,5 +14,6 @@ namespace Satish.Models
         public string Image { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+
     }
 }

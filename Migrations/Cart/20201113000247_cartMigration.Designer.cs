@@ -9,7 +9,7 @@ using Satish.Data;
 
 namespace Satish.Migrations.Cart
 {
-    [DbContext(typeof(CartContext))]
+    [DbContext(typeof(MainContext))]
     [Migration("20201113000247_cartMigration")]
     partial class cartMigration
     {
@@ -23,7 +23,7 @@ namespace Satish.Migrations.Cart
 
             modelBuilder.Entity("Satish.Models.Cart", b =>
                 {
-                    b.Property<int>("Id_cart")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -40,7 +40,7 @@ namespace Satish.Migrations.Cart
                     b.Property<bool>("estado")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id_cart");
+                    b.HasKey("Id");
 
                     b.ToTable("Cart");
                 });

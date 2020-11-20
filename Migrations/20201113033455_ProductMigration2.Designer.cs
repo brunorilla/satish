@@ -8,7 +8,7 @@ using Satish.Data;
 
 namespace Satish.Migrations
 {
-    [DbContext(typeof(ProductContext))]
+    [DbContext(typeof(MainContext))]
     [Migration("20201113033455_ProductMigration2")]
     partial class ProductMigration2
     {

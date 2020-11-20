@@ -12,9 +12,9 @@ namespace Satish.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ProductContext _context;
+        private readonly MainContext _context;
 
-        public ProductsController(ProductContext context)
+        public ProductsController(MainContext context)
         {
             _context = context;
         }

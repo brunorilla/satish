@@ -8,13 +8,18 @@ using Satish.Data;
 
 namespace Satish.Data
 {
-    public class ProductContext : DbContext
-    {
-        public ProductContext(DbContextOptions<ProductContext> options)
-            :base(options)
+    public class MainContext : DbContext
+    {   
+        public MainContext(DbContextOptions<MainContext> options)
+            : base(options)
         {
 
         }
         public DbSet<Product> Product { get; set; }
-    }
+        public DbSet<Cart> Cart { get; set; }
+
+      }
+
+
 }
+

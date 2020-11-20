@@ -12,9 +12,9 @@ namespace Satish.Controllers
 {
     public class CartController : Controller
     {
-        private readonly CartContext _context;
+        private readonly MainContext _context;
 
-        public CartController(CartContext context)
+        public CartController(MainContext context)
         {
             _context = context;
         }
@@ -34,7 +34,7 @@ namespace Satish.Controllers
             }
 
             var cart = await _context.Cart
-                .FirstOrDefaultAsync(m => m.Id_cart == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (cart == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Satish.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_cart,Id_AspNetUsers,estado,Date,Price")] Cart cart)
+        public async Task<IActionResult> Create([Bind("Id,Id_AspNetUsers,estado,Date,Price")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace Satish.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_cart,Id_AspNetUsers,estado,Date,Price")] Cart cart)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Id_AspNetUsers,estado,Date,Price")] Cart cart)
         {
-            if (id != cart.Id_cart)
+            if (id != cart.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Satish.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartExists(cart.Id_cart))
+                    if (!CartExists(cart.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Satish.Controllers
             }
 
             var cart = await _context.Cart
-                .FirstOrDefaultAsync(m => m.Id_cart == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (cart == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace Satish.Controllers
 
         private bool CartExists(int id)
         {
-            return _context.Cart.Any(e => e.Id_cart == id);
+            return _context.Cart.Any(e => e.Id == id);
         }
     }
 }
