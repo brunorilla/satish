@@ -7,11 +7,13 @@
 
 article.product-container {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     flex-grow: 1;
     box-shadow: grey 0 0 10px;
     border-radius: 4px;
     margin-bottom: 20px;
+    min-height: 300px;
+    padding: 10px 0 30px;
 }
 
     article.product-container .img-container {
@@ -19,7 +21,12 @@ article.product-container {
         overflow: hidden;
         display: flex;
         justify-content: center;
-        max-height: 300px;
+        max-height: 180px;
+    }
+
+    article.product-container .img-container .img-fluid {
+        width: auto;
+        height: 180px;
     }
 
     article.product-container .cta-wrapper {

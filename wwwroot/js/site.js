@@ -4,13 +4,12 @@
 // Write your JavaScript code.
 
 var mySwiper = new Swiper('.swiper-container', {
-    // Optional parameters
-    // If we need pagination
-    slidesPerView : 1,
 
-    // Navigation arrows
-
-    // And if we need scrollbar
+    slidesPerView: 1,
+    autoplay: {
+        delay: 5000,
+    },
+    // Scrollbar
     scrollbar: {
         el: '.swiper-scrollbar',
     },
