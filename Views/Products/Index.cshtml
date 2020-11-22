@@ -15,7 +15,7 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
-
+@*
 <table class="table">
     <thead>
         <tr>
@@ -54,3 +54,21 @@
         }
     </tbody>
 </table>
+*@
+<section class="container">
+    @foreach (var item in Model)
+    {
+    <article class="product-container">
+        <div class="img-container"><img class="img-fluid" src="@Html.DisplayFor(modelItem => item.Image)" alt="@Html.DisplayFor(modelItem => item.Name)" /></div>
+        <ul>
+            <li>@Html.DisplayFor(modelItem => item.Name)</li>
+            <li>$@Html.DisplayFor(modelItem => item.Price)</li>
+        </ul>
+        <div class="cta-wrapper">
+            <a asp-controller="Cart" asp-action="Buy" asp-route-id="@item.Id">Comprar</a>
+            <a asp-action="Details" asp-route-id="@item.Id">Detalle</a>
+        </div>
+    </article>
+    }
+
+</section>

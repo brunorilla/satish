@@ -7,55 +7,33 @@
 }
 
 
-<h1>Index</h1>
+<h1>Tu Carrito</h1>
 
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <!-- <a asp-action="Create">Create New</a>-->
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Imagen
-            </th>
-            <th>
-                Precio
-            </th>
-            <th>
-                Cantidad
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+<section class="container">
+    @foreach (var item in ViewBag.cart)
+    {
+        <article class="product-container">
+            <div class="img-container"><img class="img-fluid" src="@item.Product.Image" alt="@item.Product.Name" /></div>
+            <ul>
+                <li>@item.Product.Name</li>
+                <li>@item.Product.Price</li>
+            </ul>
+            <div class="cta-wrapper">
+                <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remover</a>
+            </div>
+        </article>
+    }
 
-        @foreach (var item in ViewBag.cart)
-        {
-            <tr>
-                <td>
-                    <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a>
-                </td>
-                <td><p>@item.Product.Id</p></td>
-                <td>@item.Product.Name</td>
-                <td>@item.Product.Price</td>
-                <td>@item.Product.Image</td>
+</section>
+<section class="container summary">
+    <h3>Total</h3>
+    <p>@ViewBag.total</p>
+</section>
 
-
-            </tr>
-        }
-        <tr>
-            <td>Sum</td>
-            <td>@ViewBag.total</td>
-        </tr>
-
-    </tbody>
-</table>
 <a asp-controller="products" asp-action="index">Continuar comprando</a>
 <a asp-controller="checkout" asp-action="index">Ir a Pagar</a>
 
