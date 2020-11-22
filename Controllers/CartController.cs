@@ -38,10 +38,10 @@ namespace Satish.Controllers
 
         private int isExist(string id)
         {
-            List<Product> cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "cart");
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             for (int i = 0; i < cart.Count; i++)
             {
-                if (cart[i].Id.Equals(id))
+                if (cart[i].Product.Id.Equals(id))
                 {
                     return i;
                 }                    
@@ -210,14 +210,13 @@ namespace Satish.Controllers
         }
 
 
-        public IActionResult Remove(string id)
+        public IActionResult Remove(int id)
         {
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            int index = isExist(id);
-            cart.RemoveAt(index);
+            cart.RemoveAt(id);
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToAction("Index");
-        }
+        } 
 
         private bool CartExists(int id)
         {
