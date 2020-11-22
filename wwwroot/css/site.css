@@ -3,6 +3,11 @@ for details on configuring this project to bundle and minify static web assets. 
 @import 'fonts.css';
 @import 'imports.css';
 @import 'product-list.css';
+@import 'home-styles.css';
+
+.bg-black {
+    background-color: #000000;
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -77,3 +82,29 @@ body {
     font-family: 'Biryani', sans-serif;
     font-weight: 900;
 }
+
+/* Main CTA styles*/
+
+ .main-cta {
+    display: inline-block;
+    line-height: 43px;
+    height: 43px;
+    color: #FFFFFF;
+    background-color: #000000;
+    border-radius: 3px;
+    padding: 0 24px;
+    transition: all .3s ease;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: .3s ease all;
+    border: 1px solid black;
+    min-width: 100px;
+    text-align: center;
+}
+
+    .main-cta:hover {
+        background-color: #FFFFFF;
+        color: #000000;
+        text-decoration: none;
+    }

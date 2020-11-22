@@ -14,18 +14,39 @@
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
-        <div class="swiper-slide"></div>
-        <div class="swiper-slide"></div>
-        <div class="swiper-slide"></div>
-        ...
+        <div class="swiper-slide">
+            <article class="swiper-slide-article">
+                <div class="overlay"></div>
+                <h2>Colección Hombre</h2>
+                <p class="slide-description">Sacos de verano desde $1500</p>
+                <div class="slide-cta-wrapper">
+                    <a class="main-cta" asp-controller="Products" asp-action="Index">Ver</a>
+                </div>
+            </article>
+            
+        </div>
+        <div class="swiper-slide">
+            <article class="swiper-slide-article">
+                <div class="overlay"></div>
+                <h2>Colección Verano</h2>
+                <p class="slide-description">Trajes de baño desde $500</p>
+                <div class="slide-cta-wrapper">
+                    <a class="main-cta" asp-controller="Products" asp-action="Index">Ver</a>
+                </div>
+            </article>
+        </div>
+        <div class="swiper-slide">
+            <article class="swiper-slide-article">
+                <div class="overlay"></div>
+                <h2>Colección Mujer</h2>
+                <p class="slide-description">Sweaters desde $750</p>
+                <div class="slide-cta-wrapper">
+                    <a class="main-cta" asp-controller="Products" asp-action="Index">Ver</a>
+                </div>
+            </article>
+        </div>
+        
     </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
-
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-
     <!-- If we need scrollbar -->
     <div class="swiper-scrollbar"></div>
 </div>
