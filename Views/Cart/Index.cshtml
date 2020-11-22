@@ -21,6 +21,7 @@
             <ul>
                 <li>@item.Product.Name</li>
                 <li>@item.Product.Price</li>
+                <li>@item.Quantity</li>
             </ul>
             <div class="cta-wrapper">
                 <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remover</a>
