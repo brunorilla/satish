@@ -29,14 +29,67 @@ namespace Satish.Controllers
         */
         public IActionResult Index()
         {
-            var cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "cart");
+            var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
-            ViewBag.total = cart.Sum(item => item.Price);
+            ViewBag.total = cart.Sum(item => item.Product.Price * item.Quantity);
             return View();
 
         }
 
-        private int isExist(string id)
+
+        // GET: Cart/Buy/5
+
+        public async Task<IActionResult> Buy(string id)
+        {
+            if (SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
+            {
+                List<Item> cart = new List<Item>();
+                var product = await _context.Product
+                .FirstOrDefaultAsync(m => m.Id == id);
+                cart.Add(new Item
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            else
+            {
+                List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+                int index = IsExist(id);
+                if (index != -1)
+                {
+                    cart[index].Quantity++;
+                }
+                else
+                {
+                    var product = await _context.Product
+                .FirstOrDefaultAsync(m => m.Id == id);
+                    cart.Add(new Item
+                    {
+                        Product = product,
+                        Quantity = 1
+                    });
+                    cart.Add(new Item { Product = product, Quantity = 1 });
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult Remove(string id)
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            int index = IsExist(id);
+            cart.RemoveAt(index);
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            return RedirectToAction("Index");
+        }
+
+
+
+        private int IsExist(string id)
         {
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             for (int i = 0; i < cart.Count; i++)
@@ -168,55 +221,6 @@ namespace Satish.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        // GET: Cart/Buy/5
-
-        public async Task<IActionResult> Buy(string id)
-        {
-            if(SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
-            {
-                List<Item> cart = new List<Item>();
-                var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
-                cart.Add(new Item
-                {
-                    Product = product,
-                    Quantity = 1
-                });
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            }
-            else
-            {
-                List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-                int index = isExist(id);
-                if(index != -1)
-                {
-                    cart[index].Quantity++;
-                } 
-                else
-                {
-                    var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
-                    cart.Add(new Item
-                    {
-                        Product = product,
-                        Quantity = 1
-                    });
-                    cart.Add(new Item { Product = product, Quantity = 1 });
-                }
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            }
-            return RedirectToAction("Index");
-        }
-
-
-        public IActionResult Remove(int id)
-        {
-            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            cart.RemoveAt(id);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return RedirectToAction("Index");
-        } 
 
         private bool CartExists(int id)
         {
