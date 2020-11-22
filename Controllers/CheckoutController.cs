@@ -13,7 +13,9 @@ namespace Satish.Controllers
     {
         public IActionResult Index()
         {
-            var cartId = HttpContext.Session.Id;
+            var connectionId = HttpContext.Connection.Id;
+            connectionId = StringTool.Truncate(connectionId, 10);
+            int cartId = int.Parse(connectionId);
             ViewBag.cartId = cartId;
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
