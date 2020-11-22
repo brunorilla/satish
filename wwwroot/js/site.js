@@ -7,7 +7,7 @@ var mySwiper = new Swiper('.swiper-container', {
 
     slidesPerView: 1,
     autoplay: {
-        delay: 5000,
+        delay: 2000,
     },
     // Scrollbar
     scrollbar: {
