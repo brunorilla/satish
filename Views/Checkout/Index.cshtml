@@ -1,9 +1,11 @@
-﻿
+﻿@model Satish.Models.Cart;
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1>@ViewBag.cartId</h1>
 <h1>Finalizar Compra</h1>
 <section class="container-fluid">
     <h3>Sus productos</h3>
@@ -29,3 +31,9 @@
     <h3>Total de su compra</h3>
     <h4>@ViewBag.total</h4>
 </section>
+
+<form asp-action="Create" asp-controller="Cart">
+    <label asp-for="Id" class="control-label"></label>
+    <input asp-for="Id" class="form-control" value=""/>
+    <span asp-validation-for="Id" class="text-danger"></span>
+</form>

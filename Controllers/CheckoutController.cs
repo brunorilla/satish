@@ -13,6 +13,8 @@ namespace Satish.Controllers
     {
         public IActionResult Index()
         {
+            var cartId = HttpContext.Session.Id;
+            ViewBag.cartId = cartId;
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
             ViewBag.total = cart.Sum(item => item.Product.Price * item.Quantity);

@@ -227,4 +227,5 @@ namespace Satish.Controllers
             return _context.Cart.Any(e => e.Id == id);
         }
     }
+
 }
