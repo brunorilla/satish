@@ -147,10 +147,6 @@ namespace Satish.Controllers
 
         // GET: Cart/Buy/5
 
-        public async Task<IActionResult> Buy (int? id)
-        {
-
-        }
 
         private bool CartExists(int id)
         {
