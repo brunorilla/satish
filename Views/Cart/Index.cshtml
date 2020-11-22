@@ -13,41 +13,91 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id_AspNetUsers)
+               Id
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.estado)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                Imagen
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Precio
             </th>
-            <th></th>
+            <th>
+                Cantidad
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Id">Remove</a>
+                </td>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+               
+            </tr>
+        }
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id_AspNetUsers)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            <td>Sum</td>
+            <td>@ViewBag.total</td>
         </tr>
-}
+
     </tbody>
 </table>
+<a asp-controller="products" asp-action="index">Continuar comprando</a>
+<a asp-controller="checkout" asp-action="index">Ir a Pagar</a>
+
+
+
+@*
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id_AspNetUsers)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_AspNetUsers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+*@

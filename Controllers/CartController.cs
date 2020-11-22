@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Satish.Data;
+using Satish.Helpers;
 using Satish.Models;
 
 namespace Satish.Controllers
@@ -20,9 +21,32 @@ namespace Satish.Controllers
         }
 
         // GET: Cart
+        /*
         public async Task<IActionResult> Index()
         {
             return View(await _context.Cart.ToListAsync());
+        }
+        */
+        public IActionResult Index()
+        {
+            var cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "cart");
+            ViewBag.cart = cart;
+            ViewBag.total = cart.Sum(item => item.Price);
+            return View();
+
+        }
+
+        private int isExist(string id)
+        {
+            List<Product> cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "cart");
+            for (int i = 0; i < cart.Count; i++)
+            {
+                if (cart[i].Id.Equals(id))
+                {
+                    return i;
+                }                    
+            }
+            return -1;
         }
 
         // GET: Cart/Details/5
@@ -147,6 +171,53 @@ namespace Satish.Controllers
 
         // GET: Cart/Buy/5
 
+        public async Task<IActionResult> Buy(string id)
+        {
+            if(SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
+            {
+                List<Item> cart = new List<Item>();
+                var product = await _context.Product
+                .FirstOrDefaultAsync(m => m.Id == id);
+                cart.Add(new Item
+                {
+                    Product = product,
+                    Quantity = 1
+                });
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            else
+            {
+                List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+                int index = isExist(id);
+                if(index != -1)
+                {
+                    cart[index].Quantity++;
+                } 
+                else
+                {
+                    var product = await _context.Product
+                .FirstOrDefaultAsync(m => m.Id == id);
+                    cart.Add(new Item
+                    {
+                        Product = product,
+                        Quantity = 1
+                    });
+                    cart.Add(new Item { Product = product, Quantity = 1 });
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        public IActionResult Remove(string id)
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            int index = isExist(id);
+            cart.RemoveAt(index);
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            return RedirectToAction("Index");
+        }
 
         private bool CartExists(int id)
         {
