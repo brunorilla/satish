@@ -64,13 +64,13 @@ namespace Satish.Controllers
                 else
                 {
                     var product = await _context.Product
-                .FirstOrDefaultAsync(m => m.Id == id);
+                    .FirstOrDefaultAsync(m => m.Id == id);
                     cart.Add(new Item
                     {
                         Product = product,
                         Quantity = 1
                     });
-                    cart.Add(new Item { Product = product, Quantity = 1 });
+
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }

@@ -5,7 +5,25 @@
 }
 
 <h1>Finalizar Compra</h1>
-<section>
+<section class="container-fluid">
+    <h3>Sus productos</h3>
+    @foreach (var item in ViewBag.cart)
+    {
+        <ul class="list-group">
+            <li class="list-group-item"><img src="@item.Product.Image"></li>
+            <li class="list-group-item">
+                <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a>
+            </li>
+            <li class="list-group-item">@item.Product.Id</li>
+            <li class="list-group-item">@item.Product.Name</li>
+            <li class="list-group-item">@item.Product.Price</li>
+          
+
+
+        </ul>
+    }
+</section>
+<section class="container-fluid">
     <h3>Total de su compra</h3>
     <h4>@ViewBag.total</h4>
 </section>
