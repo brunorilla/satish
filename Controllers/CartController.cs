@@ -145,6 +145,13 @@ namespace Satish.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: Cart/Buy/5
+
+        public async Task<IActionResult> Buy (int? id)
+        {
+
+        }
+
         private bool CartExists(int id)
         {
             return _context.Cart.Any(e => e.Id == id);
