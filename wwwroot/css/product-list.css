@@ -54,4 +54,83 @@ article.product-container {
         background-color: #FFFFFF;
         color: #000000;
     }
+
+
+    section.search-container {
+        margin: 20px 0;
+        display:flex;
+        justify-content:flex-start
+    }
+
+   form.search-form {
+        display:flex;
+        position: relative;
+        width: 100%;
+        max-width: 150px;
+        transition: .4s linear;
+        overflow:hidden;
+    }
+
+    form.search-form input[type="text"] {
+        appearance:none;
+        width:100%;
+        border:none;
+        outline:none;
+        border-radius: 4px;
+        background-color: #FFFFFF;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.4s linear;
+        border: 1px solid #000000;
+
+    }
+
+    form.search-form input[type="submit"]{
+        display:none;
+    }
+
+    form.search-form input[type="text"]::placeholder {
+        color: #000000;
+        
+    }
+
+    .search-icon {
+        position:absolute;
+        right: calc(53px/2);
+        top: 50%;
+        transform: translate(50%,-50%);
+        height:40px;
+        width: 40px;
+        pointer-events: none;
+
+    }
+    .search-icon path {
+        transition: 0.4s linear;
+        fill: #000000;
+    }
+
+     form.search-form:focus-within {
+         max-width: 100%;
+     } 
+
+      form.search-form:focus-within input[type="text"]{
+         background-color: #000000;
+         padding-right: 50px;
+         
+     }
+
+        form.search-form:focus-within input[type="text"]::placeholder{
+            color: #FFFFFF;
+        }
+
+        form.search-form:focus-within .search-icon {
+            width: 20px;
+            height: 20px;
+        } 
+    form.search-form:focus-within .search-icon path {
+        fill: #FFFFFF;
+    }
+
     
