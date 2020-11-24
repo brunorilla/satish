@@ -141,6 +141,18 @@ namespace Satish.Controllers
             }
             return View(cart);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateFromCheckout([Bind("Id_AspNetUsers,estado,Date,Price,ApplicationUserId")] Cart cart)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(cart);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "CheckoutStep1");
+            }
+            return View("../Checkout/Index");
+        }
 
         // GET: Cart/Edit/5
         public async Task<IActionResult> Edit(int? id)

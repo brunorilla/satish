@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@ViewBag.cartId</h1>
+
 <h1>Finalizar Compra</h1>
 <section class="container-fluid">
     <h3>Sus productos</h3>
@@ -31,9 +31,20 @@
     <h3>Total de su compra</h3>
     <h4>@ViewBag.total</h4>
 </section>
-
-<form asp-action="Create" asp-controller="Cart">
-    <label asp-for="Id" class="control-label"></label>
-    <input asp-for="Id" class="form-control" value=""/>
-    <span asp-validation-for="Id" class="text-danger"></span>
+<h1>@DateTime.Now</h1>
+<form asp-action="CreateFromCheckout" asp-controller="Cart">
+    
+    <input type="hidden" asp-for="Id" class="form-control" value=" " />
+    <label asp-for="Id_AspNetUsers" class="control-label"></label>
+    <input type="hidden" asp-for="Id_AspNetUsers" class="form-control" value="@ViewBag.cartId" />
+    <span asp-validation-for="Id_AspNetUsers" class="text-danger"></span>
+    <label asp-for="estado" class="control-label"></label>
+    <input type="hidden" asp-for="estado" class="form-control" value="0" />
+    <span asp-validation-for="estado" class="text-danger"></span>
+    <label asp-for="Date" class="control-label"></label>
+    <input type="hidden" asp-for="Date" value="@DateTime.Now" />
+    <label asp-for="Price" class="control-label"></label>
+    <input type="hidden" asp-for="Price" class="form-control" value="@ViewBag.total" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+    <input type="submit" value="Confirmar e ir a pago" class="btn btn-primary" />
 </form>
