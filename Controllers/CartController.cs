@@ -143,10 +143,12 @@ namespace Satish.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateFromCheckout([Bind("Id_AspNetUsers,estado,Date,Price,ApplicationUserId")] Cart cart)
+        public async Task<IActionResult> CreateFromCheckout([Bind("Id_AspNetUsers,Price")] Cart cart)
         {
             if (ModelState.IsValid)
             {
+                cart.estado = false;
+                cart.Date = DateTime.Now;
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "CheckoutStep1");
