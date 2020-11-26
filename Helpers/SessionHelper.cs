@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,8 @@ namespace Satish.Helpers
             var value = session.GetString(key);
             return value == null ? default : JsonConvert.DeserializeObject<T>(value);
         }
+
     }
 }
+
+

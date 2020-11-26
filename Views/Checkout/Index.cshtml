@@ -34,6 +34,7 @@
 <h1>@DateTime.Now</h1>
 <form asp-action="CreateFromCheckout" asp-controller="Cart">
     <input type="hidden" name="Price" value="@ViewBag.total" />
-    <input type="hidden" asp-for="Id_AspNetUsers" class="form-control" value="@ViewBag.cartId" />
+    <label asp-for="Id_AspNetUsers"></label>
+    <input type="number" asp-for="Id_AspNetUsers" class="form-control" value="" placeholder="Ingrese su DNI para identificar la compra" />
     <input type="submit" value="Confirmar e ir a pago" class="btn btn-primary" />
 </form>

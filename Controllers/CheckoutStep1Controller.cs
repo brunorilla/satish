@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Satish.Models;
 using Newtonsoft.Json;
+using Satish.Helpers;
+
 
 namespace Satish.Controllers
 {
@@ -13,9 +15,15 @@ namespace Satish.Controllers
     {
         // GET: CheckoutStep1Controller
         public ActionResult Index()
+            
         {
-            ViewData["cart"] = JsonConvert.DeserializeObject<List<Cart>>((string)TempData["cart"]);
+            Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary tempData = TempData;
+            Cart cartData = (Cart) ViewDataHelper.Get<Cart>(tempData, "cart");
+            CartProduct cartProductData = (CartProduct)ViewDataHelper.Get<CartProduct>(tempData, "cartProduct");
+            ViewBag.cart = cartData;
+            ViewBag.cartProduct = cartProductData;
 
+            
             return View();
         }
 

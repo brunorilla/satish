@@ -152,7 +152,41 @@ namespace Satish.Controllers
                 cart.Date = DateTime.Now;
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
-                TempData["cart"] = JsonConvert.SerializeObject(cart);
+                List<CartProduct> cartProductsList = new List<CartProduct>();
+                List<Item> completeCartFromJson = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+                
+                
+                foreach (var prod in completeCartFromJson)
+                {
+                    Product auxProduct = new Product
+                    {
+                        Id = prod.Product.Id,
+                    };
+                    Cart auxCart = new Cart
+                    {
+                        Id_AspNetUsers = cart.Id_AspNetUsers
+                    };
+                    CartProduct auxCartProduct = new CartProduct
+                    {
+                        ProductId = auxProduct.Id,
+                        CartId = auxCart.Id_AspNetUsers
+                    };
+                    cartProductsList.Add(auxCartProduct);
+                }
+                
+                Cart data = new Cart
+                {
+                    Id_AspNetUsers = cart.Id_AspNetUsers,
+                    Price = cart.Price,
+                    estado = cart.estado,
+                    Date = cart.Date
+                  
+                };
+                Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary tempData = TempData;
+                
+                ViewDataHelper.Put(tempData, "cart",data);
+                ViewDataHelper.Put(tempData,"cartProduct",cartProductsList);
+
                 return RedirectToAction("Index", "CheckoutStep1");
             }
             return View("../Checkout/Index");
