@@ -161,6 +161,7 @@ namespace Satish.Controllers
                     Product auxProduct = new Product
                     {
                         Id = prod.Product.Id,
+                        Name = prod.Product.Name
                     };
                     Cart auxCart = new Cart
                     {
@@ -169,6 +170,7 @@ namespace Satish.Controllers
                     CartProduct auxCartProduct = new CartProduct
                     {
                         ProductId = auxProduct.Id,
+                        Product = auxProduct,
                         CartId = auxCart.Id_AspNetUsers
                     };
                     cartProductsList.Add(auxCartProduct);
@@ -179,13 +181,14 @@ namespace Satish.Controllers
                     Id_AspNetUsers = cart.Id_AspNetUsers,
                     Price = cart.Price,
                     estado = cart.estado,
-                    Date = cart.Date
-                  
+                    Date = cart.Date,
+                    CartProducts = cartProductsList
+                    
                 };
                 Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary tempData = TempData;
                 
                 ViewDataHelper.Put(tempData, "cart",data);
-                ViewDataHelper.Put(tempData,"cartProduct",cartProductsList);
+               // ViewDataHelper.Put(tempData,"cartProduct",cartProductsList);
 
                 return RedirectToAction("Index", "CheckoutStep1");
             }

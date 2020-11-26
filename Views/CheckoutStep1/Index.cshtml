@@ -12,30 +12,51 @@
 <h1>@ViewBag.cart.ToString()</h1>
 
 <hr />
+
+<div class="container">
+    <section class="checkout-step2--summary">
+        <h3 class="checkout-step2--title">
+            Confirmación de la compra - Resumen
+        </h3>
+        <article>
+            <p>Por favor revise los datos de su compra antes de realizar el pago.</p>
+            <ul class="checkout-step2--list">
+                <li>DNI @ViewBag.cart.Id_AspNetUsers</li>
+            </ul>
+            <p>Productos</p>
+            <ul>
+                @foreach (var item in ViewBag.cart.CartProducts)
+                {
+                    <li>@item.Product.Name</li>
+                }
+            </ul>
+            <p>Precio final: @ViewBag.cart.Price</p>
+        </article>
+    </section>
+</div>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <form asp-action="Create" asp-controller="CheckoutStep2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TimeStamp" class="control-label"></label>
-                <input asp-for="TimeStamp" class="form-control" />
-                <span asp-validation-for="TimeStamp" class="text-danger"></span>
+                <label for="credit-card">Tarjeta de Crédito</label>
+                <select>
+                    <option value="American Express">American Express</option>
+                    <option value="Cabal">Cabal</option>
+                    <option value="Maestro">Maestro</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="Visa">Visa</option>
+                </select>
+                <span class="text-danger"></span>
+                <label for="credit-card-number">Número de tajerta</label>
+                <input name="credit-card-number" type="number" class="form-control" />
+                <span class="text-danger"></span>
+                <label for="vencimiento">Fecha de Vencimiento</label>
+                <input type="date" name="vencimiento" value="" />
             </div>
+            <input type="hidden" value="@ViewBag.cart" />
             <div class="form-group">
-                <label asp-for="CartProductId" class="control-label"></label>
-                <input asp-for="CartProductId" class="form-control" />
-                <span asp-validation-for="CartProductId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CartId" class="control-label"></label>
-                <select asp-for="CartId" class ="form-control" asp-items="ViewBag.CartId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductId" class="control-label"></label>
-                <select asp-for="ProductId" class ="form-control" asp-items="ViewBag.ProductId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Pagar" class="btn btn-primary" />
             </div>
         </form>
     </div>

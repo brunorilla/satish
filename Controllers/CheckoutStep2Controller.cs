@@ -4,45 +4,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Satish.Models;
-using Newtonsoft.Json;
-using Satish.Helpers;
-
 
 namespace Satish.Controllers
 {
-    public class CheckoutStep1Controller : Controller
+    public class CheckoutStep2Controller : Controller
     {
-        // GET: CheckoutStep1Controller
+        // GET: CheckoutStep2Controller
         public ActionResult Index()
-            
         {
-            Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary tempData = TempData;
-            Cart cartData = (Cart) ViewDataHelper.Get<Cart>(tempData, "cart");
-            ViewBag.cart = cartData;
-            
             return View();
         }
 
-        // GET: CheckoutStep1Controller/Details/5
+        // GET: CheckoutStep2Controller/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CheckoutStep1Controller/Create
+        // GET: CheckoutStep2Controller/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CheckoutStep1Controller/Create
+        // POST: CheckoutStep2Controller/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try
-            {
+            {   
+                Console.WriteLine(collection);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -51,13 +43,13 @@ namespace Satish.Controllers
             }
         }
 
-        // GET: CheckoutStep1Controller/Edit/5
+        // GET: CheckoutStep2Controller/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CheckoutStep1Controller/Edit/5
+        // POST: CheckoutStep2Controller/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -72,13 +64,13 @@ namespace Satish.Controllers
             }
         }
 
-        // GET: CheckoutStep1Controller/Delete/5
+        // GET: CheckoutStep2Controller/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CheckoutStep1Controller/Delete/5
+        // POST: CheckoutStep2Controller/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
