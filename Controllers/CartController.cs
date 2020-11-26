@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Satish.Data;
 using Satish.Helpers;
 using Satish.Models;
@@ -151,6 +152,7 @@ namespace Satish.Controllers
                 cart.Date = DateTime.Now;
                 _context.Add(cart);
                 await _context.SaveChangesAsync();
+                TempData["cart"] = JsonConvert.SerializeObject(cart);
                 return RedirectToAction("Index", "CheckoutStep1");
             }
             return View("../Checkout/Index");

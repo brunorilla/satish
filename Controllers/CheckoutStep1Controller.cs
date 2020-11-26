@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Satish.Models;
+using Newtonsoft.Json;
 
 namespace Satish.Controllers
 {
@@ -12,6 +14,8 @@ namespace Satish.Controllers
         // GET: CheckoutStep1Controller
         public ActionResult Index()
         {
+            ViewData["cart"] = JsonConvert.DeserializeObject<List<Cart>>((string)TempData["cart"]);
+
             return View();
         }
 
