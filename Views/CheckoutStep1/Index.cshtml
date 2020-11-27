@@ -55,7 +55,21 @@
                 <input type="date" name="vencimiento" value="" />
             </div>
             <label for="viewBagCart"></label>
-            <input name="viewBagCart" type="hidden" value="@ViewBag.cart" />
+            <input name="viewBagCart" type="hidden" value="@ViewBag.cart.Id_AspNetUsers" />
+            @{
+                int counter = 0;
+                string product = "product";
+                
+            }
+
+            @foreach (var item in ViewBag.cart.CartProducts)
+            {
+                string productValue = product + counter.ToString();
+                <label for="@productValue"></label>
+                <input name="@productValue" type="hidden" value="@item.Product.Id"/>
+                counter++;
+                
+            }
             <div class="form-group">
                 <input type="submit" value="Pagar" class="btn btn-primary" />
             </div>

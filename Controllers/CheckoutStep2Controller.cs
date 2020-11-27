@@ -12,6 +12,8 @@ namespace Satish.Controllers
 {
     public class CheckoutStep2Controller : Controller
     {
+        private readonly MainContext _context;
+            
         // GET: CheckoutStep2Controller
         public ActionResult Index()
         {
@@ -36,8 +38,23 @@ namespace Satish.Controllers
         public ActionResult Create(IFormCollection collection)
         {
             try
-            {   
-                Console.WriteLine(collection);
+            {
+                var CartId = collection["viewBagCart"];
+                foreach (var item in collection)
+                {
+                    if (item.Key.Equals("credit-card-number"))
+                    {
+                        // Do nothing
+                    } else if (item.Key.IndexOf("product") > 0)
+                    {
+                       // _context.Add();
+                    } else if (item.Key.Equals("viewBagCart"))
+                    {
+                        // updatear Cart con estado pagado
+                        //var Cart = _context.Cart.Where(x => x.Id_AspNetUsers == )
+                    }
+                    Console.WriteLine(item);
+                }
                 
                 return RedirectToAction(nameof(Index));
             }
