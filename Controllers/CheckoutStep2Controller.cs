@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Satish.Models;
+using Satish.Data;
+
 
 namespace Satish.Controllers
 {
@@ -35,6 +38,7 @@ namespace Satish.Controllers
             try
             {   
                 Console.WriteLine(collection);
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
