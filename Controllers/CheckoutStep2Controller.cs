@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using Satish.Models;
 using Satish.Data;
 
@@ -51,42 +52,39 @@ namespace Satish.Controllers
                 var CartId = collection["viewBagCart"];
                 foreach (var item in collection)
                 {
-                     if (item.Key.Contains("product")) 
-                     {
-                         var tempProdId = item.Value;
+                    if (item.Key.Contains("product"))
+                    {
+                        var tempProdId = item.Value;
 
 
-                         CartProduct _cartprod = new CartProduct
-                         {
-                             CartId = cartId_AspNetUsers,
-                             ProductId = tempProdId
-                         };
-                         var entityCartProduct = _context.CartProduct;
-                         entityCartProduct.Add(_cartprod);
-                     }
+                        CartProduct cartprod = new CartProduct
+                        {
+                            CartId = cartId_AspNetUsers,
+                            ProductId = tempProdId,
+                            TimeStamp = DateTime.Now
+                        };
+                        Console.WriteLine(cartprod);
+                        _context.Add(cartprod);
+                        var changesmade = _context.SaveChanges();
+                        
+                    }
                     else if (item.Key.Equals("viewBagCart"))
                     {
                         var idString = item.Value;
-                        
+
                         int.TryParse(idString, out cartId_AspNetUsers);
                         var entity = _context.Cart.FirstOrDefault(item => item.Id_AspNetUsers == cartId_AspNetUsers);
                         if (entity != null)
                         {
                             entity.estado = true;
-                            
+                            var changesmade2 = _context.SaveChanges();
                         }
                     }
                 }
 
-                try
-                {
-                    _context.SaveChanges();
-                }
-                catch
-                {
-                    
-                }
-                return RedirectToAction(nameof(Index));
+                ViewData["cartid"] = cartId_AspNetUsers;
+                
+                return RedirectToAction(nameof(Index),ViewData);
             }
             catch
             {

@@ -1,0 +1,17 @@
+﻿@model Satish.Models.CartProduct
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Gracias por su compra</h1>
+
+<div class="container">
+    Utilice este número para seguir su envío <p>ViewData.cartId</p>.
+    Recibirá en su domicilio durante los próximos 5 días.
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Products">Back to List</a>
+</div>
