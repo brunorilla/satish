@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using Satish.Models;
 using Satish.Data;
 
@@ -13,7 +16,12 @@ namespace Satish.Controllers
     public class CheckoutStep2Controller : Controller
     {
         private readonly MainContext _context;
-            
+
+        public CheckoutStep2Controller(MainContext context)
+        {
+            _context = context;
+        }
+
         // GET: CheckoutStep2Controller
         public ActionResult Index()
         {
@@ -35,27 +43,49 @@ namespace Satish.Controllers
         // POST: CheckoutStep2Controller/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> CreateAsync(IFormCollection collection)
         {
             try
             {
+                int cartId_AspNetUsers = 0;
                 var CartId = collection["viewBagCart"];
                 foreach (var item in collection)
                 {
-                    if (item.Key.Equals("credit-card-number"))
+                     if (item.Key.Contains("product")) 
+                     {
+                         var tempProdId = item.Value;
+
+
+                         CartProduct _cartprod = new CartProduct
+                         {
+                             CartId = cartId_AspNetUsers,
+                             ProductId = tempProdId
+                         };
+                         var entityCartProduct = _context.CartProduct;
+                         entityCartProduct.Add(_cartprod);
+                     }
+                    else if (item.Key.Equals("viewBagCart"))
                     {
-                        // Do nothing
-                    } else if (item.Key.IndexOf("product") > 0)
-                    {
-                       // _context.Add();
-                    } else if (item.Key.Equals("viewBagCart"))
-                    {
-                        // updatear Cart con estado pagado
-                        //var Cart = _context.Cart.Where(x => x.Id_AspNetUsers == )
+                        var idString = item.Value;
+                        
+                        int.TryParse(idString, out cartId_AspNetUsers);
+                        var entity = _context.Cart.FirstOrDefault(item => item.Id_AspNetUsers == cartId_AspNetUsers);
+                        if (entity != null)
+                        {
+                            entity.estado = true;
+                            
+                        }
                     }
-                    Console.WriteLine(item);
                 }
-                
+
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch
+                {
+                    
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
