@@ -31,7 +31,10 @@
     </dl>
 </div>
 <div>
-    <!--<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>  -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+   }
     <a asp-controller="Cart" asp-action="Buy" asp-route-id="@Model.Id">Comprar</a>
     <a asp-action="Index">Volver a Productos</a>
 </div>

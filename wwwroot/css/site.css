@@ -108,3 +108,7 @@ body {
         color: #000000;
         text-decoration: none;
     }
+
+    footer .container {
+        display: flex;
+    }
