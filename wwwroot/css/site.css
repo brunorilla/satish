@@ -9,6 +9,8 @@ for details on configuring this project to bundle and minify static web assets. 
 @import 'home-styles.css';
 
 @import 'checkout.css';
+@import 'cart.css';
+@import 'checkout-step-1.css';
 
 .bg-black { background-color: #000000; }
 
