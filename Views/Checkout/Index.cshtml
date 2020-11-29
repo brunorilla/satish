@@ -7,36 +7,43 @@
 
 
 <h1>Finalizar Compra</h1>
-<section class="container-fluid">
-    <h3>Sus productos</h3>
+<h3>Sus productos</h3>
+<section class="container-fluid checkout-products-container">
     @foreach (var item in ViewBag.cart)
     {
-        <ul class="list-group">
-            <li class="list-group-item"><img src="@item.Product.Image"></li>
+        <article class="product-container">
+            <div class="img-container">
+                <img class="img-fluid" src="@item.Product.Image">
+            </div>
+            <ul>
+                
+            
             <li class="list-group-item">
-                <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remove</a>
+                <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Quitar</a>
             </li>
-            <li class="list-group-item">@item.Product.Id</li>
+            <li class="list-group-item hidden">@item.Product.Id</li>
             <li class="list-group-item">@item.Product.Name</li>
             <li class="list-group-item">@item.Product.Price</li>
             <li class="list-group-item">Cantidad: @item.Quantity</li>
+            </ul>
 
 
 
-
-        </ul>
+        </article>
     }
 </section>
-<section class="container-fluid">
+<section class="container-fluid checkout-summary">
     <h3>Total de su compra</h3>
     <h4>@ViewBag.total</h4>
 </section>
 <form asp-action="CreateFromCheckout" asp-controller="Cart">
     <input type="hidden" name="Price" value="@ViewBag.total" />
     <label class="hidden" asp-for="Id_AspNetUsers"></label>
-    <input id="dnivalid" type="number" asp-for="Id_AspNetUsers" class="form-control" value="" placeholder="Ingrese su DNI para identificar la compra" />
-    <span class="dnivalid">DNI válido</span>
-    <span class="dni-notvalid">Ingrese un número de DNI válido</span>
+    <div class="for-dnivalid">
+        <input id="dnivalid" type="number" asp-for="Id_AspNetUsers" class="form-control" value="" placeholder="Ingrese su DNI para identificar la compra" />
+        <span class="dnivalid">DNI válido</span>
+        <span class="dni-notvalid">Ingrese un número de DNI válido</span>
+    </div>
     <input id="dnisubmit" type="submit" value="Confirmar e ir a pago" class="btn btn-primary" />
 </form> 
 
