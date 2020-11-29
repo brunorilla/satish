@@ -14,8 +14,9 @@
         <article class="summary-article">
             <p class="article-summary-title">Por favor revise los datos de su compra antes de realizar el pago.</p>
             <ul class="checkout-step2--list">
-                <li><span class="list-title">Identificador de Pago (DNI)</span> @ViewBag.cart.Id_AspNetUsers</li>
+                <li><span class="list-title">Identificador de Pago (DNI)</span> : @ViewBag.cart.Id_AspNetUsers</li>
             </ul>
+            <hr/>
             <p class="article-summary-title">Productos</p>
             <ul class="checkout-step2--list">
                 @foreach (var item in ViewBag.cart.CartProducts)
