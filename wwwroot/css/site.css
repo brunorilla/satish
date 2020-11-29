@@ -18,9 +18,23 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-.hidden {
-    display: none;
+.hidden { display: none; }
+
+/* Shopping bag icon*/
+
+.shopping-bag-icon {
+    height: 20px;
+    width: auto;
 }
+
+.shopping-bag-icon { transition: all .3s ease; }
+
+.shopping-bag-icon path {
+    fill: #FFF;
+    transition: all .3s ease;
+}
+
+.shopping-bag-icon:hover { transform: scale(1.5); }
 
 /* Provide sufficient contrast against white background */
 
@@ -119,6 +133,7 @@ footer div.container a svg {
     height: 20px;
     width: auto;
 }
+
 footer div.container a svg path { fill: #ffffff; }
 
 .logged-in-container {

@@ -14,19 +14,27 @@
     <!-- <a asp-action="Create">Create New</a>-->
 </p>
 <section class="container">
-    @foreach (var item in ViewBag.cart)
+    @try
     {
-        <article class="product-container">
-            <div class="img-container"><img class="img-fluid" src="@item.Product.Image" alt="@item.Product.Name" /></div>
-            <ul>
-                <li>@item.Product.Name</li>
-                <li>@item.Product.Price</li>
-                <li>@item.Quantity</li>
-            </ul>
-            <div class="cta-wrapper">
-                <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remover</a>
-            </div>
-        </article>
+        @foreach (var item in ViewBag.cart)
+        {
+            <article class="product-container">
+                <div class="img-container"><img class="img-fluid" src="@item.Product.Image" alt="@item.Product.Name"/></div>
+                <ul>
+                    <li>@item.Product.Name</li>
+                    <li>$@item.Product.Price</li>
+                    <li>@item.Quantity</li>
+                </ul>
+                <div class="cta-wrapper">
+                    <a asp-controller="cart" asp-action="remove" asp-route-id="@item.Product.Id">Remover</a>
+                </div>
+            </article>
+        }
+    }
+    catch
+    {
+        <h2>Tu carrito está vacío</h2>
+        
     }
 
 </section>
@@ -36,7 +44,11 @@
 </section>
 
 <a asp-controller="products" asp-action="index">Continuar comprando</a>
-<a asp-controller="checkout" asp-action="index">Ir a Pagar</a>
+@if (@ViewBag.total > 0)
+{
+    <a asp-controller="checkout" asp-action="index">Ir a Pagar</a>
+}
+
 
 
 

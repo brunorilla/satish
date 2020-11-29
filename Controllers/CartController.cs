@@ -32,7 +32,14 @@ namespace Satish.Controllers
         {
             var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
-            ViewBag.total = cart.Sum(item => item.Product.Price * item.Quantity);
+            try
+            {
+                ViewBag.total = cart.Sum(item => item.Product.Price * item.Quantity);
+            }
+            catch
+            {
+                ViewBag.total = 0;
+            }
             return View();
 
         }
