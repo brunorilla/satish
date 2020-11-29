@@ -114,3 +114,8 @@ footer div.container a svg {
     width: auto;
 }
 footer div.container a svg path { fill: #ffffff; }
+
+.logged-in-container {
+    display: flex;
+    align-items: center;
+}
