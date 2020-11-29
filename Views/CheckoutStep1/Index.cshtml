@@ -53,6 +53,20 @@
                 <span class="text-danger"></span>
                 <label for="vencimiento">Fecha de Vencimiento</label>
                 <input type="date" name="vencimiento" value="" />
+                <label for="provincia">Provincia</label>
+                <select name="provincia" id="provincia">
+                    <option value="" disabled selected hidden>Elija su Provincia</option>
+                </select>
+                <label for="departamento">Departamento</label>
+                <select name="departamento" id="departamento">
+                    <option value="" disabled selected hidden>Elija su departamento</option>
+                </select>
+                <label for="localidad">Localidad</label>
+                <select name="localidad" id="localidad">
+                    <option value="" disabled selected hidden>Elija su localidad</option>
+                </select>
+                <label for="domicilio"></label>
+                <input type="text" name="domicilio" value="" placeholder="Dirección" />
             </div>
             <label for="viewBagCart"></label>
             <input name="viewBagCart" type="hidden" value="@ViewBag.cart.Id_AspNetUsers" />
@@ -81,3 +95,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script type="text/javascript" src="~/js/geoForm.js"></script>
+}

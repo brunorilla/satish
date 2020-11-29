@@ -20,8 +20,8 @@
             <li class="list-group-item">@item.Product.Name</li>
             <li class="list-group-item">@item.Product.Price</li>
             <li class="list-group-item">Cantidad: @item.Quantity</li>
-            
-          
+
+
 
 
         </ul>
@@ -31,10 +31,15 @@
     <h3>Total de su compra</h3>
     <h4>@ViewBag.total</h4>
 </section>
-<h1>@DateTime.Now</h1>
 <form asp-action="CreateFromCheckout" asp-controller="Cart">
     <input type="hidden" name="Price" value="@ViewBag.total" />
-    <label asp-for="Id_AspNetUsers"></label>
-    <input type="number" asp-for="Id_AspNetUsers" class="form-control" value="" placeholder="Ingrese su DNI para identificar la compra" />
-    <input type="submit" value="Confirmar e ir a pago" class="btn btn-primary" />
-</form>
+    <label class="hidden" asp-for="Id_AspNetUsers"></label>
+    <input id="dnivalid" type="number" asp-for="Id_AspNetUsers" class="form-control" value="" placeholder="Ingrese su DNI para identificar la compra" />
+    <span class="dnivalid">DNI válido</span>
+    <span class="dni-notvalid">Ingrese un número de DNI válido</span>
+    <input id="dnisubmit" type="submit" value="Confirmar e ir a pago" class="btn btn-primary" />
+</form> 
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/checkoutValidation.js"></script>
+}

@@ -1,0 +1,10 @@
+﻿
+    .dnivalid, .dni-notvalid {
+        display: none;
+        opacity: 0;
+        transition: opacity .3s ease;
+    }
+    .show {
+        display: inline;
+        opacity: 1;
+    }
