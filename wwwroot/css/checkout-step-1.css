@@ -32,3 +32,11 @@ article.summary-article {
     font-weight: 600;
 
 }
+
+.checkout-payment-form {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #000;
+}

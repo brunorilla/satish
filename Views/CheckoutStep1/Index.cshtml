@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<hr />
+<hr/>
 
 <div class="container">
     <section class="checkout-step2--summary">
@@ -24,69 +24,81 @@
                     <li>@item.Product.Name</li>
                 }
             </ul>
-            <p><span class="list-title">Precio final:</span> @ViewBag.cart.Price</p>
+            <p>
+                <span class="list-title">Precio final:</span> @ViewBag.cart.Price
+            </p>
         </article>
     </section>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" asp-controller="CheckoutStep2">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label for="credit-card">Tarjeta de Crédito</label>
-                <select>
-                    <option value="American Express">American Express</option>
-                    <option value="Cabal">Cabal</option>
-                    <option value="Maestro">Maestro</option>
-                    <option value="MasterCard">MasterCard</option>
-                    <option value="Visa">Visa</option>
-                </select>
-                <span class="text-danger"></span>
-                <label for="credit-card-number">Número de tarjeta</label>
-                <input name="credit-card-number" type="number" class="form-control" />
-                <span class="text-danger"></span>
-                <label for="vencimiento">Fecha de Vencimiento</label>
-                <input type="date" name="vencimiento" value="" />
-                <label for="provincia">Provincia</label>
-                <select name="provincia" id="provincia">
-                    <option value="" disabled selected hidden>Elija su Provincia</option>
-                </select>
-                <label for="departamento">Departamento</label>
-                <select name="departamento" id="departamento">
-                    <option value="" disabled selected hidden>Elija su departamento</option>
-                </select>
-                <label for="localidad">Localidad</label>
-                <select name="localidad" id="localidad">
-                    <option value="" disabled selected hidden>Elija su localidad</option>
-                </select>
-                <label for="domicilio"></label>
-                <input type="text" name="domicilio" value="" placeholder="Dirección" />
-            </div>
-            <label for="viewBagCart"></label>
-            <input name="viewBagCart" type="hidden" value="@ViewBag.cart.Id_AspNetUsers" />
-            @{
-                int counter = 0;
-                string product = "product";
-                
-            }
+<div class="container checkout-payment-form">
+    <form asp-action="Create" asp-controller="CheckoutStep2">
+        <div class="form-group">
+            <label for="credit-card">Tarjeta de Crédito</label>
+            <select>
+                <option value="American Express">American Express</option>
+                <option value="Cabal">Cabal</option>
+                <option value="Maestro">Maestro</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Visa">Visa</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="credit-card-number">Número de tarjeta</label>
+            <input name="credit-card-number" type="number" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="vencimiento">Fecha de Vencimiento</label>
+            <input type="date" name="vencimiento" value="" />
+        </div>
+        <div class="form-group">
+            <label for="provincia">Provincia</label>
+            <select name="provincia" id="provincia">
+                <option value="" disabled selected hidden>Elija su Provincia</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="departamento">Departamento</label>
+            <select name="departamento" id="departamento">
+                <option value="" disabled selected hidden>Elija su departamento</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="localidad">Localidad</label>
+            <select name="localidad" id="localidad">
+                <option value="" disabled selected hidden>Elija su localidad</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="domicilio"></label>
+            <input type="text" name="domicilio" value="" placeholder="Dirección" />
+        </div>
+    
 
-            @foreach (var item in ViewBag.cart.CartProducts)
-            {
-                string productValue = product + counter.ToString();
-                <label for="@productValue"></label>
-                <input name="@productValue" type="hidden" value="@item.Product.Id"/>
-                counter++;
-                
-            }
-            <div class="form-group">
-                <input type="submit" value="Pagar" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+<label for="viewBagCart"></label>
+<input name="viewBagCart" type="hidden" value="@ViewBag.cart.Id_AspNetUsers"/>
+@{
+    int counter = 0;
+    string product = "product";
+
+}
+
+@foreach (var item in ViewBag.cart.CartProducts)
+{
+    string productValue = product + counter.ToString();
+    <label for="@productValue"></label>
+    <input name="@productValue" type="hidden" value="@item.Product.Id"/>
+    counter++;
+}
+<div class="form-group">
+    <input type="submit" value="Pagar" class="btn btn-primary"/>
+</div>
+</form>
 </div>
 
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="main-cta" asp-controller="Products" asp-action="Index">Volver</a>
 </div>
 
 @section Scripts {
