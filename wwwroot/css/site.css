@@ -142,3 +142,24 @@ footer div.container a svg path { fill: #ffffff; }
     display: flex;
     align-items: center;
 }
+
+
+/*
+    DETAILS PAGE
+*/
+
+.details-img {
+    max-height: 200px;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+div .container.details-ctas-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+div .container.details-ctas-container a {
+    margin-right: 20px;
+}
