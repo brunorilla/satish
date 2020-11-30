@@ -11,10 +11,8 @@
     <section class="checkout-step2-summary">
         <h1 class="checkout-step2--title">Gracias por su compra</h1>
         <article class="summary-article">
-            <p class="article-summary-title">Utilice este número para seguir su envío</p>
-            <ul class="checkout-step2--list">
-                <li>@ViewData.Values</li>
-            </ul>
+            <p class="article-summary-title">Utilice este número para seguir su envío <code>@ViewData["cartid"]</code></p>
+            <hr />
             <p class="article-summary-title">
                 Recibirá los productos en su domicilio en los próximos 5 días.</p>
         </article>

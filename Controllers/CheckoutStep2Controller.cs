@@ -84,7 +84,8 @@ namespace Satish.Controllers
 
                 ViewData["cartid"] = cartId_AspNetUsers;
                 
-                return RedirectToAction(nameof(Index),ViewData);
+                // return RedirectToAction(nameof(Index),ViewData);
+                return View("Index");
             }
             catch
             {
