@@ -20,7 +20,33 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-.hidden { display: none; }
+.nav-hover-style {
+    position: relative;
+
+}
+
+.nav-hover-style:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -1000px;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width .3s ease;
+}
+
+.nav-hover-style:hover:before {
+    width: 80%;
+    left: 50%;
+    margin: 0 auto;
+    transform: translateX(-50%);
+}
+
+.hidden {
+    display: none;
+}
 
 /* Shopping bag icon*/
 
