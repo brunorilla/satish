@@ -1,3 +1,3 @@
 # satish
 
-eCommerce solution using MVC architechture with .NET Core Framework
+eCommerce solution using MVC architecture with .NET Core Framework
